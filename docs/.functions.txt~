@@ -1,0 +1,35 @@
+Entity Creation:
++  node* create_node(int NODE_KEY):                                  Create a node with the local KEY number on the heap, and return a pointer to the node.
++  link* create_nlink(int NLINK_KEY):                                Create a link with the local KEY number on the heap, and return a pointer to the link.
++  adj*  create_adj(int ADJ_KEY):                                    Create an adjacency with the local KEY number on the heap, and return a pointer to the adjacency.
+
+Entity Cleanup:
++  void destroy_nodechain(node* node_list):                          Supply the initial node in the list, and free() all members, including the list root.
++  void destroy_nlinkchain(nlink* nlink_list):                       Supply the initial link in the list, and free() all members, including the list root.
++  void destroy_adjchain(adj* adj_list):                             Supply the initial adjacency in the list, and free() all members, including the list root.
++  void cleanup_tplgy_database(node_lib, nlink_lib, adj_lib):        Calls destroy_nodechain, destroy_nlinkchain, and destroy_adjchain on the supplied lists.
+
+Entity Assignment:
++  void assign_adj(adj* adj_list, node* src, node* dst, link* via):  Create adjacency in adj_list from src to dst via link.
+
+Entity Location:
++  node* find_node_by_key(node* node_list, int NODE_KEY):            Locate the node from the specified *node_list with the matching NODE_KEY value, and return a pointer to it.
++  node* find_node_by_id(node* node_list, idstr NODE_ID):            Locate the node from the specified *node_list with the matching NODE_ID value, and return a pointer to it.
++  node* find_root_node(node* node_list):                            Locate the node that is the root of the list.
++  int   count_node_keys(node* node_list):                           Find how many nodes are in the supplied list.
+
++  link* find_link_by_key(link* link_list, int LINK_KEY):            Locate the link from the specified *link_list with the matching LINK_KEY value, and return a pointer to it.
++  link* find_link_by_id(link* link_list, idstr LINK_ID):            Locate the link from the specified *link_list with the matching LINK_ID value, and return a pointer to it.
+
++  adj* find_adj_by_key(adj* adj_list, int ADJ_KEY):                 Locate the adjacency from the speficied *adj_list with the matching ADJ_KEY value, and return a pointer to it.
++  adj* find_adj_by_id(adj* adj_list, idstr ADJ_ID):                 Locate the adjacency from the speficied *adj_list with the matching ADJ_KEY value, and return a pointer to it.
++  adj* find_adjs_by_snode(adj* adj_list, node *src):                Locate the adjacencies from the speficied *adj_list with the matching source node, and return a pointer to it.
++  adj* find_adjs_by_dnode(adj* adj_list, node *dst):                Locate the adjacencies from the speficied *adj_list with the matching destination node, and return a pointer to it.
+
+Calculation:
+-  int vtr(node *src, node *dst):                                    Virtual traceroute.  Return the distance from the specified source node to the destination node.
+
+Logging:
++  void set_loglevel(int level):                                     Confine amount of logging to level and below
++  int  get_loglevel(void):                                          Return current logging level
++  void log_pr(int level, char *string):                             Print to logging mechanism

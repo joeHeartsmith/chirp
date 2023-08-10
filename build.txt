@@ -1,0 +1,5 @@
+clear && c99 -fPIC -fPIE -flto -Wpedantic -pedantic-errors -Wextra -Wall -Wformat-security -ggdb3 -O3 -fstack-clash-protection -fstack-protector-all --param ssp-buffer-size=4 -mmitigate-rop -mindirect-branch=thunk -mfunction-return=thunk -Wl,-z,relro,-z,now -Wl,-z,nostackexec  -o ./main ./main.c ./logging.c ./tplgymgt.c && time ./main
+#    clear && c99 -fPIC -flto -Wpedantic -pedantic-errors -Wextra -Wall -ggdb3 -O3 -o ./main ./main.c ./logging.c ./tplgymgt.c && time ./main
+clear && rm ./valgrind.txt; valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind.txt ./main && clear && less ./valgrind.txt
+clear && lint +posixlib -predboolint -exportlocal -nestcomment ./main.c ./logging.c ./logging.h ./pddd.h ./tplgymgt.c ./tplgymgt.h | grep -vE 'reference base|means there|bug in Splint| 25 indirections|starts inside comment'
+# cppcheck?

@@ -1,0 +1,52 @@
+#define COUNT 0
+#define PATH_STATUS 1
+#define BRANCH_FROM 2
+#define DISTANCE_METRIC 3
+#define H_OFFSET 3
+#define INVALID_KEY -1
+#define DEAD_PATH_KEY -2
+#define ACTIVE_PATH_KEY -3
+
+#define BEST_PRI 0
+#define WORST_PRI 16384
+
+static int pathpage_counter = 0;            /* tracks current number of pathpages in existence */
+static int pathpages[MAXHOPS][MAXHOPS];     /* actual pathpage content */
+static int visited_nodes[MAXHOPS];          /* visited set */
+static int pathpage_terminators[MAXHOPS];   /* which nodes are at the end of a pathpage */
+static int living_pathpages[MAXHOPS];       /* which pathpages are still alive */
+char pathids[MAXHOPS][MAXHOPS][IDSTRLEN];   /* actual node id strings for each pathpage element */
+int pathpagerestore[MAXHOPS];               /* temporary storage for pathpage contents */
+
+static inline void init_all_pathcounters(void)
+    reset_pathpage_counter();
+    initialize_pathpages();
+    initialize_visited();
+    initialize_pathpage_terminators();
+    initialize_living_pathpages();
+
+node* find_nearest_neighbor(topology_db db, node* src)
+
+static inline void create_pathpage(void)
+static inline void append_pathpage(int pathpage_index, int node_key)
+static inline void append_visited(int node_key)  /* append *to* visited set */
+static inline void remove_visited(int node_key)
+static inline void append_terminators(int node_key)  /* append *to* terminators */
+static inline void append_livingpath(int pathpage_key)
+
+static inline int node_is_visited(int node_key)
+static inline int all_nodes_are_visited(node** node_lib)
+
+static inline void find_living_pathpages(void)
+static inline void copy_pathpage(int pathpage_index)   /* copy pathpage, kill source */
+static inline void clone_pathpage(int pathpage_index)  /* copy pathpage, keep source */
+static inline void find_pathpage_terminators(void)
+static inline void find_unvisited_pathpage_terminators(void)
+static inline void dedup_terminators(void)
+static inline int find_pathpage_by_terminator(int terminator)
+
+static inline int loop_check(int pathpage_index, int kill_flag)  /* returns 1 if loop found, kill_flag kills the page */
+static inline void kill_loop_pages(int norevisit_flag)
+    /* REMINDER: norevisit_flag means terminators for pathpages w/loops get added back to the visited set */
+
+int find_shortest_pathpage(topology_db db)

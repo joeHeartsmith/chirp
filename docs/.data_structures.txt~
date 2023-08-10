@@ -1,0 +1,21 @@
+node:
+  KEY:           int            Unique local key for each node in the list
+  ID:            uuid_t         Unique global ID for each node in the topology
+  ROOT_METRIC:   int            Distance from the root node in hops
+  IS_ROOT:       int            1 = True, 0 = False
+  NEXT:    *node           Pointer to next node in node library
+
+link:
+  KEY:           int            Unique local key for each link in the list
+  ID:            char[64]       Concatenated link IPv6 addresses and node UUIDs, sorted
+  PRI:           int            Link speed/priority (higher value = higher priority)
+  S_NODE:       *node           Pointer to source node
+  D_NODE:       *node           Pointer to destination node
+  NEXT_LINK:    *link           Pointer to next link in link library
+
+adj:
+  KEY:           int           Unique local key for each adjacency in the list
+  S_NODE:       *node          Pointer to the source node
+  D_NODE:       *node          Pointer to the destination node
+  VIA:          *link          Pointer to the edge's link
+  NEXT_ADJ:     *adj           Pointer to the next adjacency in the adjacency list library

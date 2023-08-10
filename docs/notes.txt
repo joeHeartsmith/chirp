@@ -1,0 +1,20 @@
+add to comments at the top of pddd.h
+
+  overall program information (purpose, function, etc)
+
+  overall program goals (also helps explain/justify design decisions)
+   - maximum portability (linux, bsd, windows nt (interix?, wsl), embedded devices)
+     - POSIX.1 compatibility (and no reliance on Linux facilities)
+     - no reliance on external libraries
+     - simplicity, performance, control, security
+
+
+add to comments at the top of tplgymgt.c
+
+  description of generic path-finding algo
+   - basic list-building behavior
+   - discovery of all path lengths ahead-of-time
+
+  justification
+   - enables flexibility; all paths are searched, so if program changes, the algo doesn't have to
+   - works fine; how damn big do you expect these networks to be?
